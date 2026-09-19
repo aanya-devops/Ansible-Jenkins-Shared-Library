@@ -33,7 +33,7 @@ def call() {
         echo "Cloning Ansible Assignment-5 repository..."
 
         git(
-            branch: 'master',
+            branch: 'main',
             url: 'https://github.com/aanya-devops/Ansible_assignment.git'
         )
     }
