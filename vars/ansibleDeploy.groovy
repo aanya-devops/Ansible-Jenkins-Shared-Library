@@ -51,28 +51,28 @@ def call() {
 
     stage('Playbook Execution') {
 
-        echo "Running SonarQube Ansible Playbook..."
+    echo "Running SonarQube Ansible Playbook..."
 
-        withCredentials([
-            sshUserPrivateKey(
-                credentialsId: 'ansible-ec2-key',
-                keyFileVariable: 'SSH_KEY'
-            )
-        ]) {
+    withCredentials([
+        sshUserPrivateKey(
+            credentialsId: 'ansible-ec2-key',
+            keyFileVariable: 'SSH_KEY'
+        )
+    ]) {
 
-            sh """
-                cd ${config.CODE_BASE_PATH}
+        sh """
+            cd ${config.CODE_BASE_PATH}
 
-                chmod 600 "\$SSH_KEY"
+            chmod 600 "\$SSH_KEY"
 
-                ansible-playbook \
-                site.yml \
-                -i inventory \
-                --private-key "\$SSH_KEY"
-            """
-        }
+            ansible-playbook \
+            site.yml \
+            -i inventory \
+            --private-key "\$SSH_KEY" \
+            -vvv
+        """
     }
-
+}
     stage('Notification') {
 
         echo "Sending deployment notification..."
