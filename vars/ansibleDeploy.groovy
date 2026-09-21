@@ -65,7 +65,7 @@ def call() {
 
             chmod 600 "\$SSH_KEY"
 
-            ansible-playbook \
+            /var/lib/jenkins/ansible-venv/bin/ansible-playbook \
             site.yml \
             -i inventory \
             --private-key "\$SSH_KEY" \
